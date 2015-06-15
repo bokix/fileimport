@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+	<function name="afterValidateFunc" class="fileimport.convert.impl.AfterValidateFunc">
+		<desc>test校验函数</desc>
+	</function>
+	<function name="testFunc" class="fileimport.convert.impl.TestFunc">
+		<desc>test校验函数</desc>
+	</function>
+</functions>

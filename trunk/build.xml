@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<project default="main" basedir="." name="fileimport">
+	<property name="lib" location="webapp/WEB-INF/lib" />
+	<property name="project-path" location="." />
+	<property name="src" location="src" />
+	<property name="src-test" location="test" />
+	<property name="dist" value="dist" />
+	<property name="deploy" value="deploy" />
+	<property name="tomcat-lib" value="E:/apache-tomcat-4.1.40/common/lib/" />
+	<property name="version" value="1.35" />
+
+
+	<path id="all-libs">
+		<fileset dir="${tomcat-lib}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<path id="src-paths">
+		<pathelement path="src" />
+	</path>
+
+	<target name="tatamp">
+		<tstamp>
+			<format property="DSTAMP" pattern="yyyyMMdd" />
+		</tstamp>
+	</target>
+
+	<target name="clean">
+		<delete dir="${deploy}" includeemptydirs="true" />
+		<delete dir="${dist}" includeemptydirs="true" />
+	</target>
+	<target name="init" depends="clean">
+		<mkdir dir="${dist}" />
+		<mkdir dir="${deploy}" />
+	</target>
+
+	<target name="copyresource" depends="init">
+		<copy todir="${dist}" preservelastmodified="true" includeemptydirs="false">
+			<fileset dir="src">
+				<include name="**/*.*" />
+				<exclude name="**/CVS/**/*" />
+				<exclude name="**/svn/**/*" />
+				<exclude name="**/*.java" />
+				<exclude name="**/log4j.properties" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="compile" depends="copyresource">
+		<javac destdir="${dist}" encoding="GBK" debug="on" source="1.4">
+			<src refid="src-paths" />
+			<classpath refid="all-libs" />
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="${deploy}/fileimport-v${version}.jar" basedir="${dist}">
+		</jar>
+	</target>
+
+	<target name="src-jar">
+		<jar destfile="${deploy}/fileimport-src-v${version}.jar">
+			<fileset dir=".">
+				<include name="src/**" />
+				<include name="test/**" />
+			</fileset>
+		</jar>
+	</target>
+
+	<!--发布-->
+	<target name="deployWar">
+		<war basedir="webapp" destfile="${deploy}/fileimport.war" webxml="webapp/WEB-INF/web.xml" />
+	</target>
+
+	<target name="main" depends="tatamp">
+		<antcall target="jar" />
+		<antcall target="src-jar" />
+		<antcall target="deployWar" />
+		<delete dir="${dist}" includeemptydirs="true" />
+	</target>
+
+</project>

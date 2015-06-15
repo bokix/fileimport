@@ -1,0 +1,44 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+<style>
+body,table,form,a,textarea,select,button,input,link {
+	font-family: tahoma, verdana, arial, 宋体;
+	text-decoration: none;
+	word-break: break-all;
+	font-size: 14px;
+}
+</style>
+</head>
+<body>
+<h4>说明：</h4>
+你可以点击
+<a href="test.xls"><u>【这里】</u></a>
+获取一份已经写好的excel模板文件保存在你的硬盘上，然后将这个文件上传。 通过这个很简单的操作，你将学会如何使用fileimport。
+<br />
+<br />
+模板文件中的数据最终会导入到test.bean.Work这个javaBean中，其中 “任务id”，“任务名称”这些字段会直接导入，
+“日期”，“是否领导”这些字段会分别转换为java.util.Date类型和boolean类型。
+<br />
+你可以在test/fileimport/mapping/中找到test.xls.xml，这是配置文件，在这份配置文件中，你会看到所有和导入相关的配置。
+<br />
+转换器被定义在了：test/fileimport/convert/config中。
+
+<br />
+<br />
+所有这些文件，你都可以在下载的源码包中找到。
+
+<form action="test.do" method="post" target="tDIV">
+<input type="submit" value="获取模板文件"></form>
+<br />
+<form action="test.do" method="post" target="tDIV"
+	enctype="multipart/form-data">选择文件:<input type="file"
+	name="file"><br />
+<input type="submit" value="开始导入"></form>
+<br />
+result:
+<br />
+<iframe style="width: 800px; height: 400px;" name="tDIV" id="tDIV" />
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<converts>
+	<convert name="booleanConvert" class="fileimport.convert.impl.BooleanConvert">
+		<desc>将excel中的字符串转换成boolean类型。“1”，“是”，“true”将被转换成true，其他字符（包括空字符）将被转换成false</desc>
+	</convert>
+	<convert name="shortDateConvert" class="fileimport.convert.impl.ShortDateConvert">
+		<desc>把excel中yyyy-mm-dd格式的字符串转换成日期形式。如果excel中的单元格类型为日期型，则直接取其日期值</desc>
+	</convert>
+</converts>

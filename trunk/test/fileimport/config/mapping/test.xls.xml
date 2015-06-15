@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import class="test.bean.Work" maxRow="300" validateFunc="afterValidateFunc" titleRowNum="1">
+	<desc>
+		本导入文件用于导入测试
+	</desc>
+	<data>
+		<mapping from="任务id" to="id" required="true" uk="true"/>
+		<mapping from="任务名称" to="workName" required="true" uk="true"/>
+		<mapping from="人员名称" to="personName"/>
+		<mapping from="是否领导" to="leader" convert="booleanConvert"/>
+		<mapping from="日期" to="workDate" convert="shortDateConvert"/>
+	</data>
+	<fill>
+		<mapping to="createDate" value="2010-9-2" convert="shortDateConvert"/>
+	</fill>
+</import>
